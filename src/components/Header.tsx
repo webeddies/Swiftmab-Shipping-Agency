@@ -49,56 +49,41 @@ const Header = () => {
   }, [isServicesOpen]);
 
   return (
-    <header
-      className={`fixed w-full top-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-md h-24' : 'bg-transparent h-32'
-      }`}
-    >
+    <header className={`fixed w-full top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md h-24' : 'bg-transparent h-32'}`}>
       <div className="container mx-auto px-4 h-full relative">
         <div className="flex items-center justify-between h-full">
-          {/* Hamburger Icon (Mobile) */}
-          <button
-            className={`md:hidden absolute top-4 left-4 z-[60] transition-colors duration-300 ${
-              isScrolled ? 'text-[#002366]' : 'text-white'
-            }`}
-            style={{ width: '28px', height: '28px' }}
-            onClick={() => setIsMobileMenuOpen(true)}
-            aria-label="Open menu"
-          >
-            <svg
-              className="w-full h-full"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
+          {/* LEFT: Hamburger + Mobile Name */}
+          <div className="flex items-center md:hidden">
+            <button
+              className={`transition-colors duration-300 ${isScrolled ? 'text-[#002366]' : 'text-white'}`}
+              style={{ width: '28px', height: '28px' }}
+              onClick={() => setIsMobileMenuOpen(true)}
+              aria-label="Open menu"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
+              <svg className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
 
-          {/* Mobile Company Name */}
-          <Link
-            to="/"
-            onClick={(e) => {
-              if (location.pathname === '/') {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }
-            }}
-            className="flex md:hidden items-center tracking-tight ml-12 font-bold"
-            style={{ fontFamily: '"Dela Gothic One", cursive' }}
-          >
-            <span
-              className={`text-2xl transition-colors duration-300 ${
-                isScrolled ? 'text-[#002366]' : 'text-white'
-              }`}
+            <Link
+              to="/"
+              onClick={(e) => {
+                if (location.pathname === '/') {
+                  e.preventDefault();
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+              }}
+              className="ml-3 font-bold tracking-tight"
+              style={{ fontFamily: '"Dela Gothic One", cursive' }}
             >
-              Swift
-            </span>
-            <span className="ml-1 text-lg text-[#FFD700]">mab</span>
-          </Link>
+              <span className={`text-2xl transition-colors duration-300 ${isScrolled ? 'text-[#002366]' : 'text-white'}`}>
+                Swift
+              </span>
+              <span className="ml-1 text-lg text-[#FFD700]">mab</span>
+            </Link>
+          </div>
 
-          {/* Desktop Logo */}
+          {/* Desktop Name */}
           <Link
             to="/"
             onClick={(e) => {
@@ -110,18 +95,15 @@ const Header = () => {
             className="hidden md:flex items-center tracking-tight ml-12"
             style={{ fontFamily: '"Dela Gothic One", cursive' }}
           >
-            <span
-              className={`text-xl md:text-4xl font-bold transition-colors duration-300 ${
-                isScrolled ? 'text-[#002366]' : 'text-white'
-              }`}
-            >
+            <span className={`text-xl md:text-4xl font-bold transition-colors duration-300 ${isScrolled ? 'text-[#002366]' : 'text-white'}`}>
               Swift
             </span>
             <span className="ml-1 text-sm md:text-2xl text-[#FFD700]">mab</span>
           </Link>
 
-          {/* CENTER — Logo (Always centered) */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 cursor-pointer">
+          {/* RIGHT: Logo (Mobile & Desktop) */}
+          {/* Mobile Logo (on the right only) */}
+          <div className="md:hidden ml-auto">
             <Link
               to="/"
               onClick={(e) => {
@@ -134,22 +116,40 @@ const Header = () => {
               <img
                 src={swiftmabLogo}
                 alt="Swiftmab Logo"
-                className={`h-full object-contain transition-all duration-300 ${
-                  isScrolled ? 'max-h-[70px]' : 'max-h-[90px]'
-                } ${!isScrolled ? 'drop-shadow-lg brightness-110' : ''}`}
+                className={`h-[60px] object-contain transition-all duration-300 ${isScrolled ? 'max-h-[60px]' : 'max-h-[80px]'
+                  } ${!isScrolled ? 'drop-shadow-lg brightness-110' : ''}`}
               />
             </Link>
           </div>
 
-          {/* Desktop Navigation + Call Button */}
-          <div className="hidden md:flex items-center space-x-6 ml-auto">
+          {/* Desktop Centered Logo */}
+          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2">
+            <Link
+              to="/"
+              onClick={(e) => {
+                if (location.pathname === '/') {
+                  e.preventDefault();
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+              }}
+            >
+              <img
+                src={swiftmabLogo}
+                alt="Swiftmab Logo"
+                className={`h-[70px] object-contain transition-all duration-300 ${isScrolled ? 'max-h-[70px]' : 'max-h-[90px]'
+                  } ${!isScrolled ? 'drop-shadow-lg brightness-110' : ''}`}
+              />
+            </Link>
+          </div>
+
+
+          {/* Desktop Navigation + Call Us */}
+          <div className="hidden md:flex items-center space-x-6 ml-8">
             <nav className="flex items-center space-x-6">
               <div className="relative group">
                 <button
                   onClick={() => setIsServicesOpen(!isServicesOpen)}
-                  className={`flex items-center space-x-1 font-medium transition-colors duration-300 ${
-                    isScrolled ? 'text-[#002366]' : 'text-white'
-                  } hover:text-[#FFD700]`}
+                  className={`flex items-center space-x-1 font-medium transition-colors duration-300 ${isScrolled ? 'text-[#002366]' : 'text-white'} hover:text-[#FFD700]`}
                 >
                   <span>Services</span>
                   <ChevronDown
@@ -159,73 +159,25 @@ const Header = () => {
                 </button>
 
                 {isServicesOpen && (
-                  <div
-                    ref={dropdownRef}
-                    className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg z-50"
-                  >
-                    <Link
-                      to="/services/import-export"
-                      onClick={() => {
-                        setIsServicesOpen(false);
-                        sessionStorage.setItem('fromServices', 'true');
-                      }}
-                      className="block px-4 py-3 text-[#002366] hover:bg-[#002366]/10"
-                    >
-                      Import/Export
-                    </Link>
-                    <Link
-                      to="/services/freight-forwarding"
-                      onClick={() => {
-                        setIsServicesOpen(false);
-                        sessionStorage.setItem('fromServices', 'true');
-                      }}
-                      className="block px-4 py-3 text-[#002366] hover:bg-[#002366]/10"
-                    >
-                      Freight Forwarding
-                    </Link>
-                    <Link
-                      to="/services/courier"
-                      onClick={() => {
-                        setIsServicesOpen(false);
-                        sessionStorage.setItem('fromServices', 'true');
-                      }}
-                      className="block px-4 py-3 text-[#002366] hover:bg-[#002366]/10"
-                    >
-                      Courier Services
-                    </Link>
+                  <div ref={dropdownRef} className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg z-50">
+                    <Link to="/services/import-export" onClick={() => { setIsServicesOpen(false); sessionStorage.setItem('fromServices', 'true'); }} className="block px-4 py-3 text-[#002366] hover:bg-[#002366]/10">Import/Export</Link>
+                    <Link to="/services/freight-forwarding" onClick={() => { setIsServicesOpen(false); sessionStorage.setItem('fromServices', 'true'); }} className="block px-4 py-3 text-[#002366] hover:bg-[#002366]/10">Freight Forwarding</Link>
+                    <Link to="/services/courier" onClick={() => { setIsServicesOpen(false); sessionStorage.setItem('fromServices', 'true'); }} className="block px-4 py-3 text-[#002366] hover:bg-[#002366]/10">Courier Services</Link>
                   </div>
                 )}
               </div>
 
-              <HashLink
-                smooth
-                to="/#about"
-                className={`font-medium transition-colors duration-300 ${
-                  isScrolled ? 'text-[#002366]' : 'text-white'
-                } hover:text-[#FFD700]`}
-              >
-                About
-              </HashLink>
-
-              <HashLink
-                smooth
-                to="/#contact"
-                className={`font-medium transition-colors duration-300 ${
-                  isScrolled ? 'text-[#002366]' : 'text-white'
-                } hover:text-[#FFD700]`}
-              >
-                Contact
-              </HashLink>
+              <HashLink smooth to="/#about" className={`font-medium transition-colors duration-300 ${isScrolled ? 'text-[#002366]' : 'text-white'} hover:text-[#FFD700]`}>About</HashLink>
+              <HashLink smooth to="/#contact" className={`font-medium transition-colors duration-300 ${isScrolled ? 'text-[#002366]' : 'text-white'} hover:text-[#FFD700]`}>Contact</HashLink>
             </nav>
 
-            {/* Call Button */}
+            {/* Call Button (Desktop Only) */}
             <a
               href="tel:0546921087"
-              className={`px-4 py-2 rounded-lg font-medium flex items-center space-x-2 transition-all duration-300 ${
-                isScrolled
+              className={`px-4 py-2 rounded-lg font-medium flex items-center space-x-2 transition-all duration-300 ${isScrolled
                   ? 'bg-[#002366] text-white hover:bg-[#FFD700] hover:text-[#002366]'
                   : 'bg-white/20 text-white backdrop-blur-sm hover:bg-[#FFD700] hover:text-[#002366] border border-white/30'
-              }`}
+                }`}
             >
               <Phone size={16} />
               <span>Call Us</span>
@@ -239,11 +191,10 @@ const Header = () => {
         <div
           className="fixed inset-0 z-50 bg-black/40"
           onClick={() => setIsMobileMenuOpen(false)}
-          aria-label="Close mobile menu overlay"
         >
           <div
             className="bg-white w-64 h-full p-6 flex flex-col space-y-6"
-            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
+            onClick={(e) => e.stopPropagation()}
           >
             <button
               className="self-end text-[#002366] font-bold text-2xl"
@@ -253,47 +204,11 @@ const Header = () => {
               ×
             </button>
 
-            <Link
-              to="/services/import-export"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-[#002366] font-semibold hover:text-[#FFD700]"
-            >
-              Import/Export
-            </Link>
-
-            <Link
-              to="/services/freight-forwarding"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-[#002366] font-semibold hover:text-[#FFD700]"
-            >
-              Freight Forwarding
-            </Link>
-
-            <Link
-              to="/services/courier"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-[#002366] font-semibold hover:text-[#FFD700]"
-            >
-              Courier Services
-            </Link>
-
-            <HashLink
-              smooth
-              to="/#about"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-[#002366] font-semibold hover:text-[#FFD700]"
-            >
-              About
-            </HashLink>
-
-            <HashLink
-              smooth
-              to="/#contact"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-[#002366] font-semibold hover:text-[#FFD700]"
-            >
-              Contact
-            </HashLink>
+            <Link to="/services/import-export" onClick={() => setIsMobileMenuOpen(false)} className="text-[#002366] font-semibold hover:text-[#FFD700]">Import/Export</Link>
+            <Link to="/services/freight-forwarding" onClick={() => setIsMobileMenuOpen(false)} className="text-[#002366] font-semibold hover:text-[#FFD700]">Freight Forwarding</Link>
+            <Link to="/services/courier" onClick={() => setIsMobileMenuOpen(false)} className="text-[#002366] font-semibold hover:text-[#FFD700]">Courier Services</Link>
+            <HashLink smooth to="/#about" onClick={() => setIsMobileMenuOpen(false)} className="text-[#002366] font-semibold hover:text-[#FFD700]">About</HashLink>
+            <HashLink smooth to="/#contact" onClick={() => setIsMobileMenuOpen(false)} className="text-[#002366] font-semibold hover:text-[#FFD700]">Contact</HashLink>
           </div>
         </div>
       )}
