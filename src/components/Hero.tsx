@@ -27,7 +27,8 @@ const Hero = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="text-5xl md:text-6xl font-bold text-white mb-8 leading-tight"
+            className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-8 leading-tight"
+
             style={{ fontFamily: '"Dela Gothic One", cursive' }}
             key={Date.now()} // forces re-animation when page is reloaded or revisited
           >
@@ -36,7 +37,8 @@ const Hero = () => {
           </motion.h1>
 
           {/* Subtitle */}
-          <p className="text-xl text-gray-200">
+          <p className="text-base sm:text-lg md:text-xl text-gray-200">
+
             Import & Export | Freight Forwarding | Courier Services
           </p>
         </div>

@@ -107,7 +107,8 @@ const Services = () => {
                       </h3>
                     </div>
 
-                    <ul className="space-y-4 text-base group-hover:text-white text-[#002366] font-semibold">
+                    <ul className="space-y-4 text-base text-[#002366] font-semibold md:group-hover:text-white">
+
                       {service.features.map((feature, i) => (
                         <li key={i} className="flex items-center py-0.5">
                           <span className="w-2 h-2 bg-[#FFD700] rounded-full mr-2" />

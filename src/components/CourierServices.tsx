@@ -105,7 +105,7 @@ const CourierServices = () => {
             Courier <span style={{ color: '#FFD700' }}>Services</span>
           </h1>
           <p className="text-lg text-white/90 max-w-3xl mx-auto">
-            Same-day or next-day parcel delivery — swift, secure, and trackable.
+            Same-day or next-day parcel delivery; swift, secure, and trackable.
           </p>
         </div>
 
