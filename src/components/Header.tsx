@@ -49,17 +49,25 @@ const Header = () => {
     <header className={`fixed w-full top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md h-24' : 'bg-transparent h-32'}`}>
       <div className="container mx-auto px-4 h-full">
         <div className="flex items-center justify-between h-full">
-          {/* Mobile logo */}
+          {/* Mobile Logo (Visible below md) */}
           <Link
             to="/"
+            onClick={(e) => {
+              if (location.pathname === '/') {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }}
             className="flex md:hidden items-center tracking-tight"
             style={{ fontFamily: '"Dela Gothic One", cursive' }}
           >
-            <span className="text-2xl font-bold text-[#002366]">Swift</span>
+            <span className={`text-2xl font-bold transition-colors duration-300 ${isScrolled ? 'text-[#002366]' : 'text-white'}`}>
+              Swift
+            </span>
             <span className="ml-1 text-lg text-[#FFD700]">mab</span>
           </Link>
 
-          {/* Desktop logo */}
+          {/* Desktop Logo (Hidden on mobile) */}
           <Link
             to="/"
             onClick={(e) => {

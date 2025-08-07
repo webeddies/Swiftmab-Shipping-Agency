@@ -39,8 +39,8 @@ const About = () => {
           >
             About <span className="text-[#FFD700]">Swiftmab</span>
           </motion.h1>
-
         </div>
+
       </div>
 
       {/* Main Content */}
