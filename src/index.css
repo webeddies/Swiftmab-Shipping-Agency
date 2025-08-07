@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@use url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
+
 /* Custom animations */
 @keyframes float {
   0%, 100% {
@@ -105,7 +107,7 @@ textarea:focus {
   }
 }
  
-@import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
+
 
 a:focus,
 button:focus {
