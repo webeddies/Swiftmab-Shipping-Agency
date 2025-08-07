@@ -27,7 +27,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-8 leading-tight"
+            className="text-4xl sm:text-4xl md:text-6xl font-bold text-white mb-8 leading-tight"
 
             style={{ fontFamily: '"Dela Gothic One", cursive' }}
             key={Date.now()} // forces re-animation when page is reloaded or revisited

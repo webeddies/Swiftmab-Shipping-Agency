@@ -76,10 +76,10 @@ const Header = () => {
               className="ml-3 font-bold tracking-tight"
               style={{ fontFamily: '"Dela Gothic One", cursive' }}
             >
-              <span className={`text-2xl transition-colors duration-300 ${isScrolled ? 'text-[#002366]' : 'text-white'}`}>
+              <span className={`text-4xl transition-colors duration-300 ${isScrolled ? 'text-[#002366]' : 'text-white'}`}>
                 Swift
               </span>
-              <span className="ml-1 text-lg text-[#FFD700]">mab</span>
+              <span className="ml-1 text-2xl text-[#FFD700]">mab</span>
             </Link>
           </div>
 
