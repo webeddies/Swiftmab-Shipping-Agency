@@ -18,8 +18,6 @@ const About = () => {
 
       {/* Banner Section */}
       <div className="relative h-52 md:h-72 lg:h-[20rem] w-full">
-
-
         <img
           src={aboutBanner}
           alt="Swiftmab Banner"
@@ -34,14 +32,14 @@ const About = () => {
               ease: [0.16, 0.77, 0.47, 0.97],
               delay: 0.2
             }}
-            className="text-[#FFD700] text-3xl md:text-5xl font-bold"
+            className="text-[#FFD700] text-3xl md:text-5xl font-bold pt-10 md:pt-0 text-center"
             style={{ fontFamily: '"Dela Gothic One", cursive' }}
           >
             About <span className="text-[#FFD700]">Swiftmab</span>
           </motion.h1>
         </div>
-
       </div>
+
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-16 space-y-16">
