@@ -259,7 +259,7 @@ const CourierServices = () => {
 
                   <div>
                     <label className="block font-medium mb-1" htmlFor="pickupAddress">
-                      Pickup Address <span className="text-red-600">*</span>
+                      Pickup/Drop-off Address<span className="text-red-600">*</span>
                     </label>
                     <input
                       id="pickupAddress"
