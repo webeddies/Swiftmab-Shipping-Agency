@@ -49,8 +49,21 @@ const Header = () => {
 
   return (
     <header className={`fixed w-full top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md h-24' : 'bg-transparent h-32'}`}>
-      <div className="container mx-auto px-4 h-full">
+      <div className="container mx-auto px-4 h-full relative"> {/* relative for absolute children */}
         <div className="flex items-center justify-between h-full">
+
+          {/* Hamburger Icon (Mobile) */}
+          <button
+            className={`md:hidden absolute top-4 left-4 z-[60] transition-colors duration-300 ${isScrolled ? 'text-[#002366]' : 'text-white'}`}
+            style={{ width: '28px', height: '28px' }}
+            onClick={() => setIsMobileMenuOpen(true)}
+            aria-label="Open menu"
+          >
+            <svg className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+
           {/* Mobile Logo (Visible below md) */}
           <Link
             to="/"
@@ -60,7 +73,7 @@ const Header = () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }
             }}
-            className="flex md:hidden items-center tracking-tight"
+            className="flex md:hidden items-center tracking-tight ml-12" // left margin to avoid hamburger overlap
             style={{ fontFamily: '"Dela Gothic One", cursive' }}
           >
             <span className={`text-2xl font-bold transition-colors duration-300 ${isScrolled ? 'text-[#002366]' : 'text-white'}`}>
@@ -69,7 +82,7 @@ const Header = () => {
             <span className="ml-1 text-lg text-[#FFD700]">mab</span>
           </Link>
 
-          {/* Desktop Logo (Hidden on mobile) */}
+          {/* Desktop Logo (NO longer hidden on mobile) */}
           <Link
             to="/"
             onClick={(e) => {
@@ -78,13 +91,13 @@ const Header = () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }
             }}
-            className="hidden md:flex items-center tracking-tight"
+            className="flex items-center tracking-tight ml-12" // add left margin so no overlap with hamburger
             style={{ fontFamily: '"Dela Gothic One", cursive' }}
           >
-            <span className={`text-4xl font-bold transition-colors duration-300 ${isScrolled ? 'text-[#002366]' : 'text-white'}`}>
+            <span className={`text-xl md:text-4xl font-bold transition-colors duration-300 ${isScrolled ? 'text-[#002366]' : 'text-white'}`}>
               Swift
             </span>
-            <span className="ml-1 text-2xl text-[#FFD700]">mab</span>
+            <span className="ml-1 text-sm md:text-2xl text-[#FFD700]">mab</span>
           </Link>
 
           {/* CENTER — Logo */}
@@ -207,7 +220,6 @@ const Header = () => {
                 <span>Call Us</span>
               </a>
             </div>
-
           </div>
         </div>
       </div>
