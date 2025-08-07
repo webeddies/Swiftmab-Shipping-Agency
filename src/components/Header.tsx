@@ -13,7 +13,7 @@ const Header = () => {
 
   const forceSolidHeader =
     location.pathname.startsWith('/services') || location.pathname.startsWith('/quote') ||
-  location.pathname === '/about'; 
+    location.pathname === '/about';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,7 +49,17 @@ const Header = () => {
     <header className={`fixed w-full top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md h-24' : 'bg-transparent h-32'}`}>
       <div className="container mx-auto px-4 h-full">
         <div className="flex items-center justify-between h-full">
-          {/* LEFT — Company Name */}
+          {/* Mobile logo */}
+          <Link
+            to="/"
+            className="flex md:hidden items-center tracking-tight"
+            style={{ fontFamily: '"Dela Gothic One", cursive' }}
+          >
+            <span className="text-2xl font-bold text-[#002366]">Swift</span>
+            <span className="ml-1 text-lg text-[#FFD700]">mab</span>
+          </Link>
+
+          {/* Desktop logo */}
           <Link
             to="/"
             onClick={(e) => {
@@ -140,17 +150,17 @@ const Header = () => {
               </div>
 
               {/* Updated About and Contact links */}
-              <HashLink 
-                smooth 
-                to="/#about" 
+              <HashLink
+                smooth
+                to="/#about"
                 className={`font-medium transition-colors duration-300 ${isScrolled ? 'text-[#002366]' : 'text-white'} hover:text-[#FFD700]`}
               >
                 About
               </HashLink>
 
-              <HashLink 
-                smooth 
-                to="/#contact" 
+              <HashLink
+                smooth
+                to="/#contact"
                 className={`font-medium transition-colors duration-300 ${isScrolled ? 'text-[#002366]' : 'text-white'} hover:text-[#FFD700]`}
               >
                 Contact

@@ -10,9 +10,6 @@ import logisticsImage from '../images/logistics-team.jpg';
 const About = () => {
   const location = useLocation();
 
-   
-
-
   return (
     <div className="pt-0">
       <div id="top" />
@@ -20,7 +17,8 @@ const About = () => {
 
 
       {/* Banner Section */}
-      <div className="relative h-52 md:h-72 lg:h-[20rem] w-full pt-16">
+      <div className="relative h-52 md:h-72 lg:h-[20rem] w-full">
+
 
         <img
           src={aboutBanner}
