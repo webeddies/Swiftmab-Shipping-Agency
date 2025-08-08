@@ -52,8 +52,48 @@ const Header = () => {
     <header className={`fixed w-full top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md h-24' : 'bg-transparent h-32'}`}>
       <div className="container mx-auto px-4 h-full relative">
         <div className="flex items-center justify-between h-full">
-          {/* LEFT: Hamburger + Mobile Name */}
-          <div className="flex items-center md:hidden">
+          {/* MOBILE HEADER STRUCTURE */}
+          <div className="flex items-center justify-between md:hidden w-full relative h-full">
+
+            {/* Left — Swiftmab */}
+            <Link
+              to="/"
+              onClick={(e) => {
+                if (location.pathname === '/') {
+                  e.preventDefault();
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+              }}
+              className="font-bold tracking-tight"
+              style={{ fontFamily: '"Dela Gothic One", cursive' }}
+            >
+              <span className={`text-4xl transition-colors duration-300 ${isScrolled ? 'text-[#002366]' : 'text-white'}`}>
+                Swift
+              </span>
+              <span className="ml-1 text-2xl text-[#FFD700]">mab</span>
+            </Link>
+
+            {/* Center — Logo */}
+            <div className="absolute left-1/2 transform -translate-x-1/2">
+              <Link
+                to="/"
+                onClick={(e) => {
+                  if (location.pathname === '/') {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }
+                }}
+              >
+                <img
+                  src={swiftmabLogo}
+                  alt="Swiftmab Logo"
+                  className={`h-[60px] object-contain transition-all duration-300 ${isScrolled ? 'max-h-[60px]' : 'max-h-[80px]'
+                    } ${!isScrolled ? 'drop-shadow-lg brightness-110' : ''}`}
+                />
+              </Link>
+            </div>
+
+            {/* Right — Hamburger */}
             <button
               className={`transition-colors duration-300 ${isScrolled ? 'text-[#002366]' : 'text-white'}`}
               style={{ width: '28px', height: '28px' }}
@@ -64,24 +104,8 @@ const Header = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
-
-            <Link
-              to="/"
-              onClick={(e) => {
-                if (location.pathname === '/') {
-                  e.preventDefault();
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-              }}
-              className="ml-3 font-bold tracking-tight"
-              style={{ fontFamily: '"Dela Gothic One", cursive' }}
-            >
-              <span className={`text-4xl transition-colors duration-300 ${isScrolled ? 'text-[#002366]' : 'text-white'}`}>
-                Swift
-              </span>
-              <span className="ml-1 text-2xl text-[#FFD700]">mab</span>
-            </Link>
           </div>
+
 
           {/* Desktop Name */}
           <Link
@@ -100,27 +124,6 @@ const Header = () => {
             </span>
             <span className="ml-1 text-sm md:text-2xl text-[#FFD700]">mab</span>
           </Link>
-
-          {/* RIGHT: Logo (Mobile & Desktop) */}
-          {/* Mobile Logo (on the right only) */}
-          <div className="md:hidden ml-auto">
-            <Link
-              to="/"
-              onClick={(e) => {
-                if (location.pathname === '/') {
-                  e.preventDefault();
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-              }}
-            >
-              <img
-                src={swiftmabLogo}
-                alt="Swiftmab Logo"
-                className={`h-[60px] object-contain transition-all duration-300 ${isScrolled ? 'max-h-[60px]' : 'max-h-[80px]'
-                  } ${!isScrolled ? 'drop-shadow-lg brightness-110' : ''}`}
-              />
-            </Link>
-          </div>
 
           {/* Desktop Centered Logo */}
           <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2">
@@ -175,8 +178,8 @@ const Header = () => {
             <a
               href="tel:0546921087"
               className={`px-4 py-2 rounded-lg font-medium flex items-center space-x-2 transition-all duration-300 ${isScrolled
-                  ? 'bg-[#002366] text-white hover:bg-[#FFD700] hover:text-[#002366]'
-                  : 'bg-white/20 text-white backdrop-blur-sm hover:bg-[#FFD700] hover:text-[#002366] border border-white/30'
+                ? 'bg-[#002366] text-white hover:bg-[#FFD700] hover:text-[#002366]'
+                : 'bg-white/20 text-white backdrop-blur-sm hover:bg-[#FFD700] hover:text-[#002366] border border-white/30'
                 }`}
             >
               <Phone size={16} />
