@@ -67,10 +67,10 @@ const Header = () => {
               className="font-bold tracking-tight"
               style={{ fontFamily: '"Dela Gothic One", cursive' }}
             >
-              <span className={`text-4xl transition-colors duration-300 ${isScrolled ? 'text-[#002366]' : 'text-white'}`}>
+              <span className={`text-2xl transition-colors duration-300 ${isScrolled ? 'text-[#002366]' : 'text-white'}`}>
                 Swift
               </span>
-              <span className="ml-1 text-2xl text-[#FFD700]">mab</span>
+              <span className="ml-1 text-lg text-[#FFD700]">mab</span>
             </Link>
 
             {/* Center — Logo */}
@@ -87,9 +87,10 @@ const Header = () => {
                 <img
                   src={swiftmabLogo}
                   alt="Swiftmab Logo"
-                  className={`h-[60px] object-contain transition-all duration-300 ${isScrolled ? 'max-h-[60px]' : 'max-h-[80px]'
+                  className={`h-[40px] object-contain transition-all duration-300 ${isScrolled ? 'max-h-[40px]' : 'max-h-[50px]'
                     } ${!isScrolled ? 'drop-shadow-lg brightness-110' : ''}`}
                 />
+
               </Link>
             </div>
 
