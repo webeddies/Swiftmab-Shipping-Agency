@@ -4,6 +4,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import { Link } from 'react-router-dom';
+import swiftmabSecondLogo from '../images/swiftmab2.png'; // adjust path and filename
+
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -85,7 +87,7 @@ const Header = () => {
                 }}
               >
                 <img
-                  src={swiftmabLogo}
+                  src={isScrolled ? swiftmabLogo : swiftmabSecondLogo}
                   alt="Swiftmab Logo"
                   className={`h-[40px] object-contain transition-all duration-300 ${isScrolled ? 'max-h-[40px]' : 'max-h-[50px]'
                     } ${!isScrolled ? 'drop-shadow-lg brightness-110' : ''}`}
@@ -138,7 +140,7 @@ const Header = () => {
               }}
             >
               <img
-                src={swiftmabLogo}
+                src={isScrolled ? swiftmabLogo : swiftmabSecondLogo}
                 alt="Swiftmab Logo"
                 className={`h-[70px] object-contain transition-all duration-300 ${isScrolled ? 'max-h-[70px]' : 'max-h-[90px]'
                   } ${!isScrolled ? 'drop-shadow-lg brightness-110' : ''}`}
