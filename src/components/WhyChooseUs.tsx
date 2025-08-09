@@ -17,7 +17,8 @@ const WhyChooseUs = () => {
 
 
   return (
-    <section id="about" className="py-24 bg-[#F5F5F5]">
+    <section id="about" className="py-24 bg-[#E5E5E5]">
+
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         {/* LEFT SIDE — Slide in from left */}
         <motion.div

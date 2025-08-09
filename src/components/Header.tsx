@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import { Link } from 'react-router-dom';
-import swiftmabSecondLogo from '../images/swiftmab2.png'; // adjust path and filename
+
 
 
 const Header = () => {
@@ -75,26 +75,28 @@ const Header = () => {
               <span className="ml-1 text-lg text-[#FFD700]">mab</span>
             </Link>
 
-            {/* Center — Logo */}
-            <div className="absolute left-1/2 transform -translate-x-1/2">
-              <Link
-                to="/"
-                onClick={(e) => {
-                  if (location.pathname === '/') {
-                    e.preventDefault();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }
-                }}
-              >
-                <img
-                  src={isScrolled ? swiftmabLogo : swiftmabSecondLogo}
-                  alt="Swiftmab Logo"
-                  className={`h-[40px] object-contain transition-all duration-300 ${isScrolled ? 'max-h-[40px]' : 'max-h-[50px]'
-                    } ${!isScrolled ? 'drop-shadow-lg brightness-110' : ''}`}
-                />
+            {/* Center — Logo (only when scrolled) */}
+            {isScrolled && (
+              <div className="absolute left-1/2 transform -translate-x-1/2">
+                <Link
+                  to="/"
+                  onClick={(e) => {
+                    if (location.pathname === '/') {
+                      e.preventDefault();
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                  }}
+                >
+                  <img
+                    src={swiftmabLogo}
+                    alt="Swiftmab Logo"
+                    className="h-[50px] object-contain transition-all duration-300 max-h-[50px]"
+                  />
 
-              </Link>
-            </div>
+                </Link>
+              </div>
+            )}
+
 
             {/* Right — Hamburger */}
             <button
@@ -128,25 +130,28 @@ const Header = () => {
             <span className="ml-1 text-sm md:text-2xl text-[#FFD700]">mab</span>
           </Link>
 
-          {/* Desktop Centered Logo */}
-          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2">
-            <Link
-              to="/"
-              onClick={(e) => {
-                if (location.pathname === '/') {
-                  e.preventDefault();
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-              }}
-            >
-              <img
-                src={isScrolled ? swiftmabLogo : swiftmabSecondLogo}
-                alt="Swiftmab Logo"
-                className={`h-[70px] object-contain transition-all duration-300 ${isScrolled ? 'max-h-[70px]' : 'max-h-[90px]'
-                  } ${!isScrolled ? 'drop-shadow-lg brightness-110' : ''}`}
-              />
-            </Link>
-          </div>
+          {/* Desktop Centered Logo (only when scrolled) */}
+          {isScrolled && (
+            <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2">
+              <Link
+                to="/"
+                onClick={(e) => {
+                  if (location.pathname === '/') {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }
+                }}
+              >
+                <img
+                  src={swiftmabLogo}
+                  alt="Swiftmab Logo"
+                  className="h-[85px] object-contain transition-all duration-300 max-h-[85px]"
+                />
+
+              </Link>
+            </div>
+          )}
+
 
 
           {/* Desktop Navigation + Call Us */}

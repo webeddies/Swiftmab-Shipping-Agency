@@ -81,7 +81,8 @@ const Services = () => {
                   key={index}
                   onMouseEnter={() => setHoverIndex(index)}
                   onMouseLeave={() => setHoverIndex(null)}
-                  className="rounded-xl shadow-lg transition-all duration-300 group block hover:-translate-y-2 overflow-hidden"
+                  className="rounded-xl border border-gray-200 bg-white shadow-md transition-all duration-300 group block hover:-translate-y-2 overflow-hidden"
+
                   style={{
                     backgroundImage: hoverIndex !== null ? `url(${services[hoverIndex].bg})` : 'none',
                     backgroundSize: '300% 100%',
