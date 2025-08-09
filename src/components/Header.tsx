@@ -4,6 +4,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+
 
 
 
@@ -197,36 +199,102 @@ const Header = () => {
         </div>
       </div>
 
-      {/* MOBILE MENU OVERLAY */}
-      {isMobileMenuOpen && (
-        <div
-          className="fixed inset-0 z-50 bg-black/40"
-          onClick={() => setIsMobileMenuOpen(false)}
-        >
-          <div
-            className="bg-white w-64 h-full p-6 flex flex-col space-y-6"
-            onClick={(e) => e.stopPropagation()}
+      {/* MOBILE MENU OVERLAY (replace your old overlay with this) */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          // backdrop (fades)
+          <motion.div
+            key="mobile-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-50 bg-black/40"
+            onClick={() => setIsMobileMenuOpen(false)}
+            aria-hidden={!isMobileMenuOpen}
           >
-            <button
-              className="self-end text-[#002366] font-bold text-2xl"
-              onClick={() => setIsMobileMenuOpen(false)}
-              aria-label="Close menu"
+            {/* Menu panel (drops down from top) */}
+            <motion.div
+              key="mobile-panel"
+              initial={{ y: '-12%', opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: '-6%', opacity: 0 }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              // position the panel just under the header; header is h-24 when scrolled (6rem) and h-32 when not (8rem)
+              style={{ top: isScrolled ? '6rem' : '8rem' }}
+              className="absolute left-1/2 transform -translate-x-1/2 w-64 bg-gray-100 border border-white/30 rounded-xl shadow-lg p-2 z-60"
+              role="dialog"
+              aria-modal="true"
+              onClick={(e) => e.stopPropagation()} // don't close when clicking inside
             >
-              ×
-            </button>
+              <ul className="flex flex-col divide-y divide-gray-200">
+                <li>
+                  <Link
+                    to="/services/import-export"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block px-4 py-3 text-[#002366] font-semibold hover:bg-gray-200 rounded-md"
+                  >
+                    Import/Export
+                  </Link>
+                </li>
 
-            <Link to="/services/import-export" onClick={() => setIsMobileMenuOpen(false)} className="text-[#002366] font-semibold hover:text-[#FFD700]">Import/Export</Link>
-            <Link to="/services/freight-forwarding" onClick={() => setIsMobileMenuOpen(false)} className="text-[#002366] font-semibold hover:text-[#FFD700]">Freight Forwarding</Link>
-            <Link to="/services/courier" onClick={() => setIsMobileMenuOpen(false)} className="text-[#002366] font-semibold hover:text-[#FFD700]">Courier Services</Link>
+                <li>
+                  <Link
+                    to="/services/freight-forwarding"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block px-4 py-3 text-[#002366] font-semibold hover:bg-gray-200 rounded-md"
+                  >
+                    Freight Forwarding
+                  </Link>
+                </li>
 
-            {/* New Customs Clearance Link */}
-            <Link to="/services/customs-clearance" onClick={() => setIsMobileMenuOpen(false)} className="text-[#002366] font-semibold hover:text-[#FFD700]">Customs Clearance</Link>
+                <li>
+                  <Link
+                    to="/services/courier"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block px-4 py-3 text-[#002366] font-semibold hover:bg-gray-200 rounded-md"
+                  >
+                    Courier Services
+                  </Link>
+                </li>
 
-            <HashLink smooth to="/#about" onClick={() => setIsMobileMenuOpen(false)} className="text-[#002366] font-semibold hover:text-[#FFD700]">About</HashLink>
-            <HashLink smooth to="/#contact" onClick={() => setIsMobileMenuOpen(false)} className="text-[#002366] font-semibold hover:text-[#FFD700]">Contact</HashLink>
-          </div>
-        </div>
-      )}
+                <li>
+                  <Link
+                    to="/services/customs-clearance"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block px-4 py-3 text-[#002366] font-semibold hover:bg-gray-200 rounded-md"
+                  >
+                    Customs Clearance
+                  </Link>
+                </li>
+
+                <li>
+                  <HashLink
+                    smooth
+                    to="/#about"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block px-4 py-3 text-[#002366] font-semibold hover:bg-gray-200 rounded-md"
+                  >
+                    About
+                  </HashLink>
+                </li>
+
+                <li>
+                  <HashLink
+                    smooth
+                    to="/#contact"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block px-4 py-3 text-[#002366] font-semibold hover:bg-gray-200 rounded-md"
+                  >
+                    Contact
+                  </HashLink>
+                </li>
+              </ul>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
 
     </header>
   );
