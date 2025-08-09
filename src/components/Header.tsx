@@ -102,8 +102,10 @@ const Header = () => {
 
             {/* Right — Hamburger */}
             <button
-              className={`transition-colors duration-300 border border-white rounded-lg p-[2px] ${isScrolled ? 'text-[#002366]' : 'text-white'}`}
-              style={{ width: '28px', height: '28px' }}
+              className={`transition-colors duration-300 rounded-lg 
+    p-1 border 
+    ${isScrolled ? 'text-[#002366] border-[#002366]' : 'text-white border-white'}`}
+              style={{ width: '32px', height: '32px' }}
               onClick={() => setIsMobileMenuOpen(true)}
               aria-label="Open menu"
             >
