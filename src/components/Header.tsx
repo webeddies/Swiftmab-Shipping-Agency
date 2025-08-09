@@ -102,7 +102,7 @@ const Header = () => {
 
             {/* Right — Hamburger */}
             <button
-              className={`transition-colors duration-300 ${isScrolled ? 'text-[#002366]' : 'text-white'}`}
+              className={`transition-colors duration-300 border border-white rounded-lg p-[2px] ${isScrolled ? 'text-[#002366]' : 'text-white'}`}
               style={{ width: '28px', height: '28px' }}
               onClick={() => setIsMobileMenuOpen(true)}
               aria-label="Open menu"
@@ -111,6 +111,7 @@ const Header = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
+
           </div>
 
 
