@@ -218,11 +218,16 @@ const Header = () => {
             <Link to="/services/import-export" onClick={() => setIsMobileMenuOpen(false)} className="text-[#002366] font-semibold hover:text-[#FFD700]">Import/Export</Link>
             <Link to="/services/freight-forwarding" onClick={() => setIsMobileMenuOpen(false)} className="text-[#002366] font-semibold hover:text-[#FFD700]">Freight Forwarding</Link>
             <Link to="/services/courier" onClick={() => setIsMobileMenuOpen(false)} className="text-[#002366] font-semibold hover:text-[#FFD700]">Courier Services</Link>
+
+            {/* New Customs Clearance Link */}
+            <Link to="/services/customs-clearance" onClick={() => setIsMobileMenuOpen(false)} className="text-[#002366] font-semibold hover:text-[#FFD700]">Customs Clearance</Link>
+
             <HashLink smooth to="/#about" onClick={() => setIsMobileMenuOpen(false)} className="text-[#002366] font-semibold hover:text-[#FFD700]">About</HashLink>
             <HashLink smooth to="/#contact" onClick={() => setIsMobileMenuOpen(false)} className="text-[#002366] font-semibold hover:text-[#FFD700]">Contact</HashLink>
           </div>
         </div>
       )}
+
     </header>
   );
 };

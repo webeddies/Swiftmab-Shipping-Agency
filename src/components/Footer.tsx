@@ -82,7 +82,9 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <span className="text-gray-300">Customs Clearance</span>
+                <Link to="/services/customs-clearance" className="text-gray-300 hover:text-[#FFD700] transition-colors duration-300">
+                  Customs Clearance
+                </Link>
               </li>
             </ul>
           </div>
@@ -93,7 +95,7 @@ const Footer = () => {
             <div className="text-gray-300 mb-4 md:mb-0">
               <p>&copy; 2025 Swiftmab Shipping Agency. All rights reserved.</p>
             </div>
-            
+
           </div>
         </div>
       </div>

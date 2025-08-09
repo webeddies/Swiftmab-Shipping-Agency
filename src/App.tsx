@@ -18,6 +18,7 @@ import FreightForwarding from './components/FreightForwarding';
 import CourierServices from './components/CourierServices';
 import FreightQuote from './components/FreightQuote';
 import About from './components/About';
+import CustomsClearance from './components/CustomsClearance';
 
 
 const HomePage = () => (
@@ -46,6 +47,7 @@ function App() {
           <Route path="/services/courier" element={<CourierServices />} />
           <Route path="/quote/freight" element={<FreightQuote />} />
           <Route path="/about" element={<About />} />
+          <Route path="/services/customs-clearance" element={<CustomsClearance />} />
 
         </Routes>
         <Footer />
