@@ -42,11 +42,12 @@ const CustomsClearance = () => {
               ease: [0.16, 0.77, 0.47, 0.97],
               delay: 0.2
             }}
-            className="text-[#FFD700] text-3xl md:text-5xl font-bold pt-10 md:pt-0 text-center"
+            className="text-2xl sm:text-3xl md:text-5xl font-bold pt-10 md:pt-0 text-center text-[#FFD700]"
             style={{ fontFamily: '"Dela Gothic One", cursive' }}
           >
             Customs <span className="text-[#FFD700]">Clearance</span>
           </motion.h1>
+
         </div>
       </div>
 
@@ -60,15 +61,16 @@ const CustomsClearance = () => {
           viewport={{ once: false, amount: 0.3 }}
           className="max-w-4xl mx-auto"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-[#002366] mb-6 text-center">
+          <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-[#002366] mb-6 text-center">
             Your Trusted Customs Clearance Agent
           </h2>
-          
+
+
           <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
             <p>
               Having a trustworthy customs clearing partner is crucial when navigating the complexities of international trade. Swiftmab is a trusted name in customs clearance, committed to making your import and export operations seamless and efficient. Our deep understanding of local regulations and global standards makes us the preferred choice for businesses looking to streamline their customs processes.
             </p>
-            
+
             <p>
               Swiftmab ensures your goods are cleared and released on time with our reliable customs clearance services. We take the stress out of the process by handling every detail in full compliance with all relevant regulations and requirements.
             </p>
@@ -87,7 +89,7 @@ const CustomsClearance = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-[#002366] mb-4">
               Our Customs Clearance Process
             </h2>
-            
+
             <div className="space-y-6">
               {processSteps.map((step, index) => (
                 <motion.div
@@ -138,16 +140,16 @@ const CustomsClearance = () => {
           <h3 className="text-2xl font-semibold text-[#002366] mb-4">
             Our Customs Services Include:
           </h3>
-          
+
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {[
               "Preparing accurate customs documentation",
               "Managing pre-entry and clearance procedures",
-               
+
               "Conducting commodity inspections",
               "Classification of goods (HS codes)",
               "Duty and tax calculation",
-               
+
               "Temporary import/export permits"
             ].map((service, index) => (
               <motion.li
