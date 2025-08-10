@@ -97,7 +97,7 @@ const ImportExport = () => {
         {/* Title section - slide up */}
         <div className={`text-center mb-12 transition-all duration-700 delay-100 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <h1
-            className="text-4xl md:text-5xl font-bold mb-4"
+            className="text-3xl md:text-5xl font-bold mb-4"
             style={{ fontFamily: '"Dela Gothic One", cursive', color: '#002366' }}
           >
             Import & Export <span style={{ color: '#FFD700' }}>Services</span>
