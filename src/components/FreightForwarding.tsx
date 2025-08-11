@@ -27,7 +27,7 @@ const FreightForwarding = () => {
       <div className="relative z-20 container mx-auto px-4">
         {/* Title section - slide up with slight bounce */}
         <div className={`text-center mb-12 transition-all duration-700 delay-100 ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <h1 className="text-3xl md:text-5xl font-bold mb-4" style={{ fontFamily: '"Dela Gothic One", cursive', color: '#FFD700' }}>
+          <h1 className="text-2xl md:text-5xl font-bold mb-4" style={{ fontFamily: '"Dela Gothic One", cursive', color: '#FFD700' }}>
             Freight Forwarding
           </h1>
           <p className="text-lg text-white/90 max-w-3xl mx-auto">
@@ -86,7 +86,7 @@ const FreightForwarding = () => {
         {/* Process Section - Slide up animation */}
         <div className={`max-w-5xl mx-auto mb-16 transition-all duration-700 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold mb-2" style={{ fontFamily: '"Dela Gothic One", cursive', color: '#FFD700' }}>
+            <h2 className="text-2xl font-bold mb-2" style={{ fontFamily: '"Dela Gothic One", cursive', color: '#FFD700' }}>
               Swiftmab Freight Forwarding Process
             </h2>
             <p className="text-lg text-white/90">

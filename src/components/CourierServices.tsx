@@ -99,7 +99,7 @@ const CourierServices = () => {
             }`}
         >
           <h1
-            className="text-3xl md:text-5xl font-bold mb-4"
+            className="text-2xl md:text-5xl font-bold mb-4"
             style={{ fontFamily: '"Dela Gothic One", cursive', color: '#002366' }}
           >
             Courier <span style={{ color: '#FFD700' }}>Services</span>

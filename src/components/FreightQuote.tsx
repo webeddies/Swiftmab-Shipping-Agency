@@ -41,7 +41,7 @@ const RequestQuote = () => {
         style={{ backgroundImage: `url(${bannerImage})` }}
       >
         <h1
-          className={`text-4xl md:text-5xl font-bold mb-4 text-center transition-all duration-1000 delay-100 transform ${
+          className={`text-2xl md:text-5xl font-bold mb-4 text-center transition-all duration-1000 delay-100 transform ${
             isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-6'
           }`}
           style={{ fontFamily: '"Dela Gothic One", cursive' }}
