@@ -123,19 +123,19 @@ const FreightForwarding = () => {
                 desc: 'Doorstep delivery anywhere in Ghana'
               }
             ].map((step, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isLoaded ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.3 + (index * 0.15) }}
-                className="bg-white/90 text-[#002366] p-6 rounded-lg shadow-lg text-center"
+
+              <div 
+                className={`bg-white/90 text-[#002366] p-6 rounded-lg shadow-lg text-center transition-all duration-700 delay-${300 + (index * 150)} ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+
               >
                 <div className="w-12 h-12 bg-[#FFD700] text-[#002366] rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
                   {step.icon}
                 </div>
                 <h3 className="text-xl font-bold mb-2">{step.title}</h3>
                 <p className="text-[#002366]/90">{step.desc}</p>
-              </motion.div>
+
+              </div>
+
             ))}
           </div>
         </div>

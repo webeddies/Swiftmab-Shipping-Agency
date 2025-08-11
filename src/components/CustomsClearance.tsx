@@ -42,12 +42,11 @@ const CustomsClearance = () => {
               ease: [0.16, 0.77, 0.47, 0.97],
               delay: 0.2
             }}
-            className="text-2xl sm:text-3xl md:text-5xl font-bold pt-10 md:pt-0 text-center text-[#FFD700]"
+            className="text-2xl sm:text-3xl md:text-5xl font-bold pt-16 text-center text-[#FFD700]"
             style={{ fontFamily: '"Dela Gothic One", cursive' }}
           >
             Customs <span className="text-[#FFD700]">Clearance</span>
           </motion.h1>
-
         </div>
       </div>
 

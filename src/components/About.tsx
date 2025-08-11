@@ -32,7 +32,7 @@ const About = () => {
               ease: [0.16, 0.77, 0.47, 0.97],
               delay: 0.2
             }}
-            className="text-[#FFD700] text-3xl md:text-5xl font-bold pt-10 md:pt-0 text-center"
+            className="text-[#FFD700] text-3xl md:text-5xl font-bold pt-16 text-center"
             style={{ fontFamily: '"Dela Gothic One", cursive' }}
           >
             About <span className="text-[#FFD700]">Swiftmab</span>
