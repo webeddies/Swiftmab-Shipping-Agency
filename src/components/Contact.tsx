@@ -3,13 +3,12 @@ import { Phone, Mail, MapPin, Clock, Send, CheckCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    service: '',
-    message: ''
-  });
+  const initialFormData = {
+    name: "",
+    phone: "",
+    email: "",
+    message: "",
+  };
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = (
@@ -21,22 +20,32 @@ const Contact = () => {
     });
   };
 
+  const [formData, setFormData] = useState(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+
     const formData = new FormData(e.currentTarget);
+
     try {
       const res = await fetch('https://formspree.io/f/mwpqnkna', {
         method: 'POST',
         headers: { Accept: 'application/json' },
         body: formData,
       });
+
+
       if (res.ok) {
         setSubmitted(true);
-        e.currentTarget.reset();
+        setFormData(initialFormData);
+
+        // ✅ Hide success message after 3 seconds
+        setTimeout(() => {
+          setIsSubmitted(false);
+        }, 3000);
       }
     } catch (err) {
       console.error('Submission failed', err);
@@ -44,6 +53,7 @@ const Contact = () => {
       setIsSubmitting(false);
     }
   };
+
 
   return (
     <section id="contact" className="py-20 bg-white">
@@ -94,10 +104,10 @@ const Contact = () => {
                   <div>
                     <h4 className="font-bold text-[#002366] mb-1">Phone & WhatsApp</h4>
                     <a
-                      href="tel:0546921087"
+                      href="tel:0541671196"
                       className="text-[#FFD700] hover:underline text-lg font-medium"
                     >
-                      054 692 1087
+                      054 167 1196
                     </a>
                     <p className="text-gray-600 text-sm mt-1">Click to call or WhatsApp us</p>
                   </div>
@@ -111,10 +121,10 @@ const Contact = () => {
                   <div>
                     <h4 className="font-bold text-[#002366] mb-1">Email</h4>
                     <a
-                      href="mailto:afidanyo0546921087@gmail.com"
+                      href="mailto:swiftmabshippingagency1@gmail.com"
                       className="text-[#FFD700] hover:underline break-all"
                     >
-                      afidanyo0546921087@gmail.com
+                      swiftmabshippingagency1@gmail.com
                     </a>
 
                   </div>
@@ -188,7 +198,7 @@ const Contact = () => {
                   </p>
 
 
-                  
+
 
 
                   {isSubmitted ? (
@@ -204,7 +214,7 @@ const Contact = () => {
                       {/* Name & Phone */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-[#002366] font-medium mb-2">Full Name 
+                          <label className="block text-[#002366] font-medium mb-2">Full Name
                             <span className="text-red-600">*</span>
                           </label>
                           <input
@@ -218,7 +228,7 @@ const Contact = () => {
                           />
                         </div>
                         <div>
-                          <label className="block text-[#002366] font-medium mb-2">Phone Number 
+                          <label className="block text-[#002366] font-medium mb-2">Phone Number
                             <span className="text-red-600">*</span>
                           </label>
                           <input
@@ -235,7 +245,7 @@ const Contact = () => {
 
                       {/* Email */}
                       <div>
-                        <label className="block text-[#002366] font-medium mb-2">Email Address 
+                        <label className="block text-[#002366] font-medium mb-2">Email Address
                           <span className="text-red-600">*</span>
                         </label>
                         <input
@@ -253,7 +263,7 @@ const Contact = () => {
 
                       {/* Message */}
                       <div>
-                        <label className="block text-[#002366] font-medium mb-2">Message 
+                        <label className="block text-[#002366] font-medium mb-2">Message
                           <span className="text-red-600">*</span>
                         </label>
                         <textarea

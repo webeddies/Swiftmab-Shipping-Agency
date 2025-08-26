@@ -13,12 +13,15 @@ const CourierServices = () => {
   const [formData, setFormData] = useState({
     senderName: '',
     recipientName: '',
-    email: '',
-    phone: '',
+    senderPhone: '',
+    recipientPhone: '',
     pickupAddress: '',
     deliveryAddress: '',
     packageDetails: '',
+    packageImageUrl: '', // NEW field for Cloudinary URL
   });
+
+  const [uploading, setUploading] = useState(false); // track file upload
 
   useEffect(() => {
     setIsLoaded(true);
@@ -46,30 +49,75 @@ const CourierServices = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  // Handle file upload to Cloudinary
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "swiftmab"); // your Cloudinary upload preset
+
+    try {
+      const res = await fetch(
+        "https://api.cloudinary.com/v1_1/dqbrtrfft/image/upload",
+        {
+          method: "POST",
+          body: data,
+        }
+      );
+      const cloudinaryData = await res.json();
+      setFormData(prev => ({
+        ...prev,
+        packageImageUrl: cloudinaryData.secure_url, // save the uploaded file URL
+      }));
+    } catch (err) {
+      console.error("Image upload failed:", err);
+    } finally {
+      setUploading(false);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitted(false);
 
-    const form = e.currentTarget;
-    const data = new FormData(form);
-
     try {
+      // Build FormData instead of JSON
+      const data = new FormData();
+      data.append("senderName", formData.senderName);
+      data.append("recipientName", formData.recipientName);
+      data.append("senderPhone", formData.senderPhone);
+      data.append("recipientPhone", formData.recipientPhone);
+      data.append("pickupAddress", formData.pickupAddress);
+      data.append("deliveryAddress", formData.deliveryAddress);
+      data.append("packageDetails", formData.packageDetails);
+
+      if (formData.packageImageUrl) {
+        data.append("packageImageUrl", formData.packageImageUrl);
+      }
+
       const res = await fetch("https://formspree.io/f/mwpqnkna", {
         method: "POST",
-        headers: { Accept: "application/json" },
-        body: data,
+        body: data, // send FormData (not JSON)
+        headers: {
+          Accept: "application/json",
+        },
       });
 
       if (res.ok) {
+        // Reset form fields
         setFormData({
-          senderName: '',
-          recipientName: '',
-          email: '',
-          phone: '',
-          pickupAddress: '',
-          deliveryAddress: '',
-          packageDetails: '',
+          senderName: "",
+          recipientName: "",
+          senderPhone: "",
+          recipientPhone: "",
+          pickupAddress: "",
+          deliveryAddress: "",
+          packageDetails: "",
+          packageImageUrl: "",
         });
         setSubmitted(true);
       } else {
@@ -81,6 +129,9 @@ const CourierServices = () => {
       setIsSubmitting(false);
     }
   };
+
+
+
 
   return (
     <section className="relative pt-40 pb-20 text-white overflow-hidden">
@@ -127,7 +178,7 @@ const CourierServices = () => {
             {
               icon: PackageCheck,
               title: 'Safe Parcel Handling',
-              desc: 'We handle your items with care — no rough handling or breakage.',
+              desc: 'We handle your items with care; no rough handling or breakage.',
             },
             {
               icon: LocateFixed,
@@ -226,15 +277,32 @@ const CourierServices = () => {
                   </div>
 
                   <div>
-                    <label className="block font-medium mb-1" htmlFor="phone">
-                      Phone Number <span className="text-red-600">*</span>
+                    <label className="block font-medium mb-1" htmlFor="senderPhone">
+                      Sender's Phone Number <span className="text-red-600">*</span>
                     </label>
                     <input
-                      id="phone"
+                      id="senderPhone"
                       type="tel"
-                      name="phone"
+                      name="senderPhone"
                       required
-                      value={formData.phone}
+                      value={formData.senderPhone}
+                      onChange={handleChange}
+                      placeholder="Delivery notifications number"
+                      className="w-full p-3 border border-gray-300 rounded"
+                    />
+                  </div>
+
+
+                  <div>
+                    <label className="block font-medium mb-1" htmlFor="recipientPhone">
+                      Recipient’s Phone Number <span className="text-red-600">*</span>
+                    </label>
+                    <input
+                      id="recipientPhone"
+                      type="tel"
+                      name="recipientPhone"
+                      required
+                      value={formData.recipientPhone}
                       onChange={handleChange}
                       placeholder="Delivery notifications number"
                       className="w-full p-3 border border-gray-300 rounded"
@@ -242,24 +310,8 @@ const CourierServices = () => {
                   </div>
 
                   <div>
-                    <label className="block font-medium mb-1" htmlFor="email">
-                      Email Address <span className="text-red-600">*</span>
-                    </label>
-                    <input
-                      id="email"
-                      type="email"
-                      name="email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="Your email for notifications"
-                      className="w-full p-3 border border-gray-300 rounded"
-                    />
-                  </div>
-
-                  <div>
                     <label className="block font-medium mb-1" htmlFor="pickupAddress">
-                      Pickup/Drop-off Address<span className="text-red-600">*</span>
+                      Pickup Address<span className="text-red-600">*</span>
                     </label>
                     <input
                       id="pickupAddress"
@@ -274,7 +326,7 @@ const CourierServices = () => {
 
                   <div>
                     <label className="block font-medium mb-1" htmlFor="deliveryAddress">
-                      Delivery Address <span className="text-red-600">*</span>
+                      Delivery/ Drop-off Address <span className="text-red-600">*</span>
                     </label>
                     <input
                       id="deliveryAddress"
@@ -303,6 +355,28 @@ const CourierServices = () => {
                     placeholder="Describe your package"
                   />
                 </div>
+
+                <div>
+                  <label className="block font-medium mb-1" htmlFor="packageImage">
+                    Upload Package Image
+                  </label>
+                  <input
+                    id="packageImage"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileUpload}
+                    className="w-full p-3 border border-gray-300 rounded"
+                  />
+                  <p className="text-sm text-gray-500 mt-1">
+                    JPG, PNG, or PDF (max 10MB)
+                  </p>
+                  {uploading && <p className="text-sm text-blue-600 mt-1">Uploading...</p>}
+                  {formData.packageImageUrl && (
+                    <p className="text-green-600 text-sm mt-1">Image uploaded ✅</p>
+                  )}
+                </div>
+
+
 
                 <p className="text-sm text-red-600 font-semibold mb-4">
                   Note: Swiftmab Couriers do not accept checks or money orders.

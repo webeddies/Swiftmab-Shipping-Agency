@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Globe, Truck, Package, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import bg1 from '../images/bg-import.jpg';
-import bg2 from '../images/bg-freight.jpg';
+import bg2 from '../images/bg-freight.png';
 import bg3 from '../images/bg-courier.jpg';
 
 const Services = () => {
