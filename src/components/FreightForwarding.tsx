@@ -124,7 +124,7 @@ const FreightForwarding = () => {
               }
             ].map((step, index) => (
 
-              <div 
+              <div
                 className={`bg-white/90 text-[#002366] p-6 rounded-lg shadow-lg text-center transition-all duration-700 delay-${300 + (index * 150)} ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
 
               >
@@ -141,15 +141,19 @@ const FreightForwarding = () => {
         </div>
 
         {/* Button - fade in with pulse effect */}
-        <div className={`text-center transition-opacity duration-700 delay-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+        <div
+          className={`text-center transition-opacity duration-700 delay-700 ${isLoaded ? "opacity-100" : "opacity-0"
+            }`}
+        >
           <Link
             to="/quote/freight"
-            className="inline-block bg-[#FFD700] text-[#002366] px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:scale-105 transition-all animate-pulse-once"
+            className="inline-block bg-transparent text-white border-2 border-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 hover:bg-[#FFD700] hover:text-[#002366] hover:border-transparent"
             onClick={() => window.scrollTo(0, 0)}
           >
             Request a Freight Quote
           </Link>
         </div>
+
       </div>
     </section>
   );

@@ -14,7 +14,7 @@ const Services = () => {
       title: 'Import/Export',
       description:
         'Seamless customs clearance for businesses. We handle all documentation and regulatory requirements to ensure your goods move smoothly across borders.',
-      features: ['Customs Documentation', 'Regulatory Compliance', 'Duty Optimization', 'Trade Consultation'],
+      features: ['Customs Documentation', 'Regulatory Compliance', 'Duty Optimization'],
       bg: bg1,
     },
     {

@@ -1,9 +1,138 @@
 import React, { useState, useEffect } from "react";
 import bannerImage from "../images/requestquotebg.jpg";
 import blurBackground from "../images/quote-blur.jpg";
+import Select, { components, SingleValue } from 'react-select';
+import countryList from 'react-select-country-list';
 
 const CLOUD_NAME = "dqbrtrfft";
 const UPLOAD_PRESET = "swiftmab";
+
+// Define the correct type for country data
+type CountryData = {
+  value: string;
+  label: string;
+};
+
+// Flag emoji mapping for common countries
+const flagMap: { [key: string]: string } = {
+  'AD': '🇦🇩', 'AE': '🇦🇪', 'AF': '🇦🇫', 'AG': '🇦🇬', 'AI': '🇦🇮', 'AL': '🇦🇱', 'AM': '🇦🇲',
+  'AO': '🇦🇴', 'AQ': '🇦🇶', 'AR': '🇦🇷', 'AS': '🇦🇸', 'AT': '🇦🇹', 'AU': '🇦🇺', 'AW': '🇦🇼',
+  'AX': '🇦🇽', 'AZ': '🇦🇿', 'BA': '🇧🇦', 'BB': '🇧🇧', 'BD': '🇧🇩', 'BE': '🇧🇪', 'BF': '🇧🇫',
+  'BG': '🇧🇬', 'BH': '🇧🇭', 'BI': '🇧🇮', 'BJ': '🇧🇯', 'BL': '🇧🇱', 'BM': '🇧🇲', 'BN': '🇧🇳',
+  'BO': '🇧🇴', 'BQ': '🇧🇶', 'BR': '🇧🇷', 'BS': '🇧🇸', 'BT': '🇧🇹', 'BV': '🇧🇻', 'BW': '🇧🇼',
+  'BY': '🇧🇾', 'BZ': '🇧🇿', 'CA': '🇨🇦', 'CC': '🇨🇨', 'CD': '🇨🇩', 'CF': '🇨🇫', 'CG': '🇨🇬',
+  'CH': '🇨🇭', 'CI': '🇨🇮', 'CK': '🇨🇰', 'CL': '🇨🇱', 'CM': '🇨🇲', 'CN': '🇨🇳', 'CO': '🇨🇴',
+  'CR': '🇨🇷', 'CU': '🇨🇺', 'CV': '🇨🇻', 'CW': '🇨🇼', 'CX': '🇨🇽', 'CY': '🇨🇾', 'CZ': '🇨🇿',
+  'DE': '🇩🇪', 'DJ': '🇩🇯', 'DK': '🇩🇰', 'DM': '🇩🇲', 'DO': '🇩🇴', 'DZ': '🇩🇿', 'EC': '🇪🇨',
+  'EE': '🇪🇪', 'EG': '🇪🇬', 'EH': '🇪🇭', 'ER': '🇪🇷', 'ES': '🇪🇸', 'ET': '🇪🇹', 'FI': '🇫🇮',
+  'FJ': '🇫🇯', 'FK': '🇫🇰', 'FM': '🇫🇲', 'FO': '🇫🇴', 'FR': '🇫🇷', 'GA': '🇬🇦', 'GB': '🇬🇧',
+  'GD': '🇬🇩', 'GE': '🇬🇪', 'GF': '🇬🇫', 'GG': '🇬🇬', 'GH': '🇬🇭', 'GI': '🇬🇮', 'GL': '🇬🇱',
+  'GM': '🇬🇲', 'GN': '🇬🇳', 'GP': '🇬🇵', 'GQ': '🇬🇶', 'GR': '🇬🇷', 'GS': '🇬🇸', 'GT': '🇬🇹',
+  'GU': '🇬🇺', 'GW': '🇬🇼', 'GY': '🇬🇾', 'HK': '🇭🇰', 'HM': '🇭🇲', 'HN': '🇭🇳', 'HR': '🇭🇷',
+  'HT': '🇭🇹', 'HU': '🇭🇺', 'ID': '🇮🇩', 'IE': '🇮🇪', 'IL': '🇮🇱', 'IM': '🇮🇲', 'IN': '🇮🇳',
+  'IO': '🇮🇴', 'IQ': '🇮🇶', 'IR': '🇮🇷', 'IS': '🇮🇸', 'IT': '🇮🇹', 'JE': '🇯🇪', 'JM': '🇯🇲',
+  'JO': '🇯🇴', 'JP': '🇯🇵', 'KE': '🇰🇪', 'KG': '🇰🇬', 'KH': '🇰🇭', 'KI': '🇰🇮', 'KM': '🇰🇲',
+  'KN': '🇰🇳', 'KP': '🇰🇵', 'KR': '🇰🇷', 'KW': '🇰🇼', 'KY': '🇰🇾', 'KZ': '🇰🇿', 'LA': '🇱🇦',
+  'LB': '🇱🇧', 'LC': '🇱🇨', 'LI': '🇱🇮', 'LK': '🇱🇰', 'LR': '🇱🇷', 'LS': '🇱🇸', 'LT': '🇱🇹',
+  'LU': '🇱🇺', 'LV': '🇱🇻', 'LY': '🇱🇾', 'MA': '🇲🇦', 'MC': '🇲🇨', 'MD': '🇲🇩', 'ME': '🇲🇪',
+  'MF': '🇲🇫', 'MG': '🇲🇬', 'MH': '🇲🇭', 'MK': '🇲🇰', 'ML': '🇲🇱', 'MM': '🇲🇲', 'MN': '🇲🇳',
+  'MO': '🇲🇴', 'MP': '🇲🇵', 'MQ': '🇲🇶', 'MR': '🇲🇷', 'MS': '🇲🇸', 'MT': '🇲🇹', 'MU': '🇲🇺',
+  'MV': '🇲🇻', 'MW': '🇲🇼', 'MX': '🇲🇽', 'MY': '🇲🇾', 'MZ': '🇲🇿', 'NA': '🇳🇦', 'NC': '🇳🇨',
+  'NE': '🇳🇪', 'NF': '🇳🇫', 'NG': '🇳🇬', 'NI': '🇳🇮', 'NL': '🇳🇱', 'NO': '🇳🇴', 'NP': '🇳🇵',
+  'NR': '🇳🇷', 'NU': '🇳🇺', 'NZ': '🇳🇿', 'OM': '🇴🇲', 'PA': '🇵🇦', 'PE': '🇵🇪', 'PF': '🇵🇫',
+  'PG': '🇵🇬', 'PH': '🇵🇭', 'PK': '🇵🇰', 'PL': '🇵🇱', 'PM': '🇵🇲', 'PN': '🇵🇳', 'PR': '🇵🇷',
+  'PS': '🇵🇸', 'PT': '🇵🇹', 'PW': '🇵🇼', 'PY': '🇵🇾', 'QA': '🇶🇦', 'RE': '🇷🇪', 'RO': '🇷🇴',
+  'RS': '🇷🇸', 'RU': '🇷🇺', 'RW': '🇷🇼', 'SA': '🇸🇦', 'SB': '🇸🇧', 'SC': '🇸🇨', 'SD': '🇸🇩',
+  'SE': '🇸🇪', 'SG': '🇸🇬', 'SH': '🇸🇭', 'SI': '🇸🇮', 'SJ': '🇸🇯', 'SK': '🇸🇰', 'SL': '🇸🇱',
+  'SM': '🇸🇲', 'SN': '🇸🇳', 'SO': '🇸🇴', 'SR': '🇸🇷', 'SS': '🇸🇸', 'ST': '🇸🇹', 'SV': '🇸🇻',
+  'SX': '🇸🇽', 'SY': '🇸🇾', 'SZ': '🇸🇿', 'TC': '🇹🇨', 'TD': '🇹🇩', 'TF': '🇹🇫', 'TG': '🇹🇬',
+  'TH': '🇹🇭', 'TJ': '🇹🇯', 'TK': '🇹🇰', 'TL': '🇹🇱', 'TM': '🇹🇲', 'TN': '🇹🇳', 'TO': '🇹🇴',
+  'TR': '🇹🇷', 'TT': '🇹🇹', 'TV': '🇹🇻', 'TW': '🇹🇼', 'TZ': '🇹🇿', 'UA': '🇺🇦', 'UG': '🇺🇬',
+  'UM': '🇺🇲', 'US': '🇺🇸', 'UY': '🇺🇾', 'UZ': '🇺🇿', 'VA': '🇻🇦', 'VC': '🇻🇨', 'VE': '🇻🇪',
+  'VG': '🇻🇬', 'VI': '🇻🇮', 'VN': '🇻🇳', 'VU': '🇻🇺', 'WF': '🇼🇫', 'WS': '🇼🇸', 'YE': '🇾🇪',
+  'YT': '🇾🇹', 'ZA': '🇿🇦', 'ZM': '🇿🇲', 'ZW': '🇿🇼'
+};
+
+// Function to get flag emoji from country code
+const getFlagEmoji = (countryCode: string) => {
+  if (!countryCode) return '';
+  return flagMap[countryCode.toUpperCase()] || '';
+};
+
+// Custom Option component with flag
+const CustomOption = (props: any) => {
+  const { data } = props;
+  return (
+    <components.Option {...props}>
+      <div className="flex items-center gap-2">
+        <span className="text-lg">{getFlagEmoji(data.value)}</span>
+        <span>{data.label}</span>
+      </div>
+    </components.Option>
+  );
+};
+
+// Custom SingleValue component with flag (shows selected value)
+const CustomSingleValue = (props: any) => {
+  const { data } = props;
+  return (
+    <components.SingleValue {...props}>
+      <div className="flex items-center gap-2">
+        <span className="text-lg">{getFlagEmoji(data.value)}</span>
+        <span>{data.label}</span>
+      </div>
+    </components.SingleValue>
+  );
+};
+
+const CountryDropdown = ({ name, required = false }: { name: string; required?: boolean }) => {
+  const [value, setValue] = useState<CountryData | null>(null);
+  const options = countryList().getData();
+
+  const handleChange = (selectedOption: SingleValue<CountryData>) => {
+    setValue(selectedOption);
+  };
+
+  return (
+    <>
+      <Select
+        options={options}
+        value={value}
+        onChange={handleChange}
+        className="text-black"
+        placeholder="Select a country..."
+        components={{
+          Option: CustomOption,
+          SingleValue: CustomSingleValue,
+        }}
+        styles={{
+          option: (provided, state) => ({
+            ...provided,
+            backgroundColor: state.isFocused ? '#f3f4f6' : 'white',
+            color: 'black',
+            cursor: 'pointer',
+          }),
+          control: (provided) => ({
+            ...provided,
+            border: '1px solid #d1d5db',
+            borderRadius: '0.375rem',
+            minHeight: '42px',
+            '&:hover': {
+              borderColor: '#9ca3af',
+            },
+          }),
+        }}
+      />
+      {/* Hidden input to send the selected country value with the form */}
+      <input
+        type="hidden"
+        name={name}
+        value={value?.value || ''}
+        required={required}
+      />
+    </>
+  );
+};
 
 const RequestQuote = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -48,7 +177,6 @@ const RequestQuote = () => {
         formData.append("Attachment1", uploadedUrl); // send URL instead of file
       }
 
-
       const att2 = form.querySelector<HTMLInputElement>("input[name='Attachment2']");
       if (att2?.files?.length) {
         const file = att2.files[0];
@@ -83,9 +211,8 @@ const RequestQuote = () => {
         style={{ backgroundImage: `url(${bannerImage})` }}
       >
         <h1
-          className={`text-2xl md:text-5xl font-bold mb-4 text-center transition-all duration-1000 delay-100 transform ${
-            isLoaded ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-6"
-          }`}
+          className={`text-2xl md:text-5xl font-bold mb-4 text-center transition-all duration-1000 delay-100 transform ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-6"
+            }`}
           style={{ fontFamily: '"Dela Gothic One", cursive' }}
         >
           <span className="text-[#FFD700]">Request a Quote</span>
@@ -100,9 +227,8 @@ const RequestQuote = () => {
         <div className="backdrop-blur-sm bg-white/80 w-full px-4 py-16">
           {/* Intro */}
           <div
-            className={`max-w-3xl mx-auto mt-10 text-center text-gray-700 px-4 transition-all duration-1000 delay-300 ${
-              isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-            }`}
+            className={`max-w-3xl mx-auto mt-10 text-center text-gray-700 px-4 transition-all duration-1000 delay-300 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+              }`}
           >
             <p className="mb-4">
               Thank you for considering Swiftmab! Please fill out the form below
@@ -113,7 +239,7 @@ const RequestQuote = () => {
             <p>
               We offer personalized solutions that match your unique needs and
               budget, so please provide us with as much information as possible
-              to ensure an accurate quote. We are grateful for the opportunity to 
+              to ensure an accurate quote. We are grateful for the opportunity to
               serve you and look forward to helping you with your shipping needs.
             </p>
           </div>
@@ -121,9 +247,8 @@ const RequestQuote = () => {
           {/* Form */}
           <form
             onSubmit={handleSubmit}
-            className={`mt-12 max-w-3xl mx-auto bg-[#F0F6FF]/90 rounded-lg shadow-md p-6 space-y-6 transition-all duration-1000 delay-500 ${
-              isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-            }`}
+            className={`mt-12 max-w-3xl mx-auto bg-[#F0F6FF]/90 rounded-lg shadow-md p-6 space-y-6 transition-all duration-1000 delay-500 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+              }`}
           >
             <input type="hidden" name="_redirect" value="false" />
 
@@ -198,32 +323,6 @@ const RequestQuote = () => {
               </div>
             </div>
 
-            {/* Origin + Destination */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block font-medium mb-1">
-                  Origin Country <span className="text-red-500">*</span>
-                </label>
-                <input
-                  name="origin"
-                  required
-                  placeholder="e.g. China, UAE"
-                  className="w-full border rounded-md px-4 py-2"
-                />
-              </div>
-              <div>
-                <label className="block font-medium mb-1">
-                  Destination Country <span className="text-red-500">*</span>
-                </label>
-                <input
-                  name="destination"
-                  required
-                  placeholder="e.g. Ghana, USA"
-                  className="w-full border rounded-md px-4 py-2"
-                />
-              </div>
-            </div>
-
             {/* Weight + Packages */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
@@ -251,11 +350,93 @@ const RequestQuote = () => {
               </div>
             </div>
 
+            {/* Origin + Destination Structured */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Departure Section */}
+              <div className="bg-white/70 p-4 rounded-lg shadow-sm">
+                <h3 className="font-bold text-lg mb-3 text-[#002366]">Departure</h3>
+
+                {/* Country */}
+                <div className="mb-4">
+                  <label className="block font-medium mb-1">
+                    Country <span className="text-red-500">*</span>
+                  </label>
+                  <CountryDropdown name="originCountry" required={true} />
+                </div>
+
+                {/* City */}
+                <div className="mb-4">
+                  <label className="block font-medium mb-1">
+                    City <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    name="originCity"
+                    required
+                    placeholder="e.g. Johannesburg"
+                    className="w-full border rounded-md px-4 py-2"
+                  />
+                </div>
+
+                {/* Address */}
+                <div>
+                  <label className="block font-medium mb-1">
+                    Address <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    name="originAddress"
+                    required
+                    placeholder="Departure address"
+                    className="w-full border rounded-md px-4 py-2"
+                  />
+                </div>
+              </div>
+
+              {/* Destination Section */}
+              <div className="bg-white/70 p-4 rounded-lg shadow-sm">
+                <h3 className="font-bold text-lg mb-3 text-[#002366]">Destination</h3>
+
+                {/* Country */}
+                <div className="mb-4">
+                  <label className="block font-medium mb-1">
+                    Country <span className="text-red-500">*</span>
+                  </label>
+                  <CountryDropdown name="destinationCountry" required={true} />
+                </div>
+
+                {/* City */}
+                <div className="mb-4">
+                  <label className="block font-medium mb-1">
+                    City <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    name="destinationCity"
+                    required
+                    placeholder="e.g. Accra"
+                    className="w-full border rounded-md px-4 py-2"
+                  />
+                </div>
+
+                {/* Address */}
+                <div>
+                  <label className="block font-medium mb-1">
+                    Address <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    name="destinationAddress"
+                    required
+                    placeholder="Destination address"
+                    className="w-full border rounded-md px-4 py-2"
+                  />
+                </div>
+              </div>
+            </div>
+
             {/* Date */}
             <div>
               <label className="block font-medium mb-1">
                 Preferred Shipment Date <span className="text-red-500">*</span>
               </label>
+              <p className="py-2 text-gray-700">Please provide your move date:</p>
               <input
                 name="date"
                 type="date"
@@ -273,7 +454,7 @@ const RequestQuote = () => {
                 name="notes"
                 rows={4}
                 required
-                placeholder="e.g. refrigeration, insurance, etc."
+                placeholder="Your Message Query here"
                 className="w-full border rounded-md px-4 py-2"
               />
             </div>
@@ -295,7 +476,6 @@ const RequestQuote = () => {
             </div>
 
             <div className="mt-4">
-               
               <input
                 type="file"
                 name="Attachment2"
@@ -306,8 +486,6 @@ const RequestQuote = () => {
                 JPG, PNG, or PDF (max 10MB)
               </p>
             </div>
-
-            
 
             {/* Submit */}
             <div className="text-right">

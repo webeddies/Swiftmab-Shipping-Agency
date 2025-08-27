@@ -212,7 +212,7 @@ const ImportExport = () => {
         <div className="text-center">
           <button
             onClick={() => setIsModalOpen(true)}
-            className="bg-[#FFD700] text-[#002366] px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:scale-105 transition-all"
+            className="inline-block bg-transparent text-white border-2 border-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 hover:bg-[#FFD700] hover:text-[#002366] hover:border-transparent"
           >
             Request Import/Export Support
           </button>
