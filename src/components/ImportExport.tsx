@@ -364,7 +364,7 @@ const ImportExport = () => {
                   name="Goods Description"
                   rows={4}
                   className="w-full border rounded-md px-4 py-2"
-                  placeholder="e.g. 200 boxes of electronics"
+                  placeholder="Details of goods..."
                   required
                 />
               </div>
