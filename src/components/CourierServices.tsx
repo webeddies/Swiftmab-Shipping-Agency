@@ -99,7 +99,7 @@ const CourierServices = () => {
         data.append("packageImageUrl", formData.packageImageUrl);
       }
 
-      const res = await fetch("https://formspree.io/f/mwpqnkna", {
+      const res = await fetch("https://formspree.io/f/xvgbopwz", {
         method: "POST",
         body: data, // send FormData (not JSON)
         headers: {

@@ -26,7 +26,7 @@ const Footer = () => {
               for businesses and individuals across the globe.
             </p>
             <div className="flex space-x-4">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="bg-white/10 p-3 rounded-lg hover:bg-[#FFD700] hover:text-[#002366] transition-all duration-300">
+              <a href="https://www.facebook.com/profile.php?id=61579656132870" target="_blank" rel="noopener noreferrer" className="bg-white/10 p-3 rounded-lg hover:bg-[#FFD700] hover:text-[#002366] transition-all duration-300">
                 <Facebook size={20} />
               </a>
               <a href="https://www.tiktok.com/@swiftmabshippingagency?_t=ZM-8zDwzNLNelB&_r=1" target="_blank" rel="noopener noreferrer" className="bg-white/10 p-3 rounded-lg hover:bg-[#FFD700] hover:text-[#002366] transition-all duration-300">
@@ -100,15 +100,11 @@ const Footer = () => {
       >
         <MessageCircle className="w-6 h-6" />
       </a>
-
-       
-
         <div className="border-t border-white/20 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-gray-300 mb-4 md:mb-0">
               <p>&copy; 2025 Swiftmab Shipping Agency. All rights reserved.</p>
             </div>
-
           </div>
         </div>
       </div>

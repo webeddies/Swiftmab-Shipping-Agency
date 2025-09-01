@@ -31,7 +31,7 @@ const Contact = () => {
     const formData = new FormData(e.currentTarget);
 
     try {
-      const res = await fetch('https://formspree.io/f/mwpqnkna', {
+      const res = await fetch('https://formspree.io/f/xnnbqagz', {
         method: 'POST',
         headers: { Accept: 'application/json' },
         body: formData,
@@ -152,7 +152,7 @@ const Contact = () => {
                   <div>
                     <h4 className="font-bold text-[#002366] mb-1">Business Hours</h4>
                     <p className="text-gray-700">
-                      Monday - Friday: 8:00 AM - 6:00 PM<br />
+                      Monday - Friday: 8:00 AM - 5:00 PM<br />
                       Saturday: 8:00 AM - 4:00 PM<br />
 
                     </p>

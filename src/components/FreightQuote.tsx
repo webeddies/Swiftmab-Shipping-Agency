@@ -186,7 +186,7 @@ const RequestQuote = () => {
       }
 
       // 2. Send to Formspree
-      const res = await fetch("https://formspree.io/f/mwpqnkna", {
+      const res = await fetch("https://formspree.io/f/xrbagzyq", {
         method: "POST",
         body: formData,
         headers: { Accept: "application/json" },

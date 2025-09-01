@@ -1,5 +1,5 @@
 import { ChevronDown, Phone } from 'lucide-react';
-import swiftmabLogo from '../images/swiftmab.png';
+import swiftmabLogo from '../images/swiftmab-Recovered.png';
 import React, { useState, useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';

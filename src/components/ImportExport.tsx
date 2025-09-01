@@ -133,7 +133,7 @@ const ImportExport = () => {
       }
 
       // submit to Formspree (FormData)
-      const res = await fetch("https://formspree.io/f/mwpqnkna", {
+      const res = await fetch("https://formspree.io/f/mblajrzy", {
         method: "POST",
         body: data,
         headers: { Accept: "application/json" }
@@ -234,7 +234,7 @@ const ImportExport = () => {
 
               {/* existing fields */}
               {[
-                { name: 'Full Name', type: 'text', placeholder: 'e.g. Daniel K. Mensah' },
+                { name: 'Full Name', type: 'text', placeholder: 'e.g. Daniel Mensah' },
                 { name: 'Phone', type: 'tel', placeholder: 'e.g. 0551234567' },
                 { name: 'Email', type: 'text', placeholder: 'your@email.com' },
                 { name: 'Location', type: 'text', placeholder: 'e.g. Dansoman, Accra' }
